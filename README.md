@@ -7,11 +7,11 @@ Atividade prática desenvolvida em **Linguagem C** focada no gerenciamento, pers
 
 ## Tecnologias e Conceitos Computacionais Implementados
 
-* **Manipulacao de Arquivos Binarios (.bin):** Armazenamento otimizado de dados utilizando estruturas de tamanho fixo (struct). Ao contrario dos arquivos de texto tradicionais, o formato binario elimina o overhead de conversao de dados e garante que cada registro ocupe exatamente o mesmo espaco fisico em disco.
-* **Acesso Aleatorio com fseek():** Capacidade de saltar diretamente para qualquer posicao (indice) do arquivo sem a necessidade de ler os registros anteriores sequencialmente. O deslocamento em bytes e calculado em tempo de execucao com base no tamanho da estrutura.
-* **Leitura e Escrita Direta em Bloco (fread / fwrite):** Operacoes de E/S eficientes que transferem blocos inteiros de memoria diretamente para o disco, e vice-versa, com apenas uma chamada de funcao.
-* **Restauracao de Fluxo com rewind():** Reposicionamento instantaneo e seguro do cursor de leitura/escrita do arquivo de volta para o byte zero (o inicio absoluto do arquivo).
-* **Remocao Logica (Soft Delete):** Estrategia avancada de gestao de dados onde um registro nao e fisicamente apagado, mas sim marcado como inativo atraves de uma flag de controle (ativo), sendo ignorado nas operacoes de listagem e consulta.
+* **Manipulacao de Arquivos Binarios (.bin):** Armazenamento otimizado usando estruturas de tamanho fixo (struct), eliminando a conversao de dados e garantindo tamanho previsivel em disco.
+* **Acesso Aleatorio com fseek():** Salta diretamente para qualquer posicao do arquivo sem ler os registros anteriores sequencialmente, calculando o deslocamento em bytes.
+* **Leitura e Escrita Direta em Bloco (fread / fwrite):** Transferencia eficiente de blocos inteiros de memoria direto para o disco (e vice-versa) com uma unica chamada.
+* **Restauracao de Fluxo com rewind():** Reposiciona o cursor de leitura instantaneamente de volta para o inicio absoluto do arquivo (byte zero).
+* **Remocao Logica (Soft Delete):** Desativacao de registros via flag de controle (ativo = 0) para ocultar dados sem a necessidade de reestruturar o arquivo fisico.
 
 ---
 
@@ -22,7 +22,7 @@ O fluxo de interacao e a interface do usuario via terminal foram desenvolvidos s
 1. **Cadastrar um novo cliente em uma posicao especifica:** Aloca a estrutura do cliente diretamente no indice fisico do arquivo escolhido pelo usuario, permitindo a criacao de arquivos esparsos.
 2. **Consultar um cliente pelo numero da conta:** Realiza uma varredura sequencial do inicio ao fim do arquivo para localizar o identificador exclusivo, filtrando apenas registros logicamente ativos.
 3. **Atualizar o saldo de um cliente:** Localiza a conta informada e altera o valor do saldo diretamente no arquivo fisico, utilizando posicionamento relativo do ponteiro.
-4. **Encerrar conta (remover cliente):** Realiza a desativacao logica do cliente, alterando a flag interna de integridade.
+4. **Encerrar conta (remover cliente):** Altera a flag do cliente para inativo (remocao logica).
 5. **Listar todos os clientes:** Exibe na tela todos os dados atualmente guardados em disco que constam como ativos, indicando as suas respectivas posicoes fisicas.
 6. **Restaurar leitura do inicio (rewind) e listar:** Executa nativamente a funcao rewind() para forcar o cursor do arquivo a regressar ao byte inicial e repete o algoritmo de listagem completa.
 7. **Encerrar:** Garante o encerramento seguro e a liberacao de todos os descritores de arquivos abertos (fclose) antes de finalizar o processo do sistema.
