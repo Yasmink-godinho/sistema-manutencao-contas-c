@@ -44,6 +44,7 @@ typedef struct {
     int ativo;          // 4 bytes - Flag de controle de integridade (1 = Ativo, 0 = Inativo)
 } Cliente;
 ```
+---
 
 ## Robustez do Código 
 
