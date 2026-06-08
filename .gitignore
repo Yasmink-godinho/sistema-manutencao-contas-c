@@ -1,0 +1,4 @@
+# Ignorar executaveis e arquivos de dados locais
+*.exe
+*.bin
+output/
